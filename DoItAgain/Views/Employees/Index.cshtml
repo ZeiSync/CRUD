@@ -1,0 +1,81 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model EmployeeListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1 class="display-4 text-center">Index</h1>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success text-center text-muted" role="alert">@TempData["Message"]</div>
+}
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-dark text-light pl-3 pr-3" asp-controller="Employees" asp-action="Create">Add</a> 
+    </div>
+    <div class="col-6">
+        <form class="form-inline mb-2 float-right" method="get">
+            <input class="form-control mr-2" asp-for="SearchKeyword" />
+            <button class="btn btn-dark text-light">Search</button>
+        </form>
+    </div>
+</div>
+
+
+<form method="post">
+    <table class="table table-striped">
+        <tr class="bg-dark text-light">
+            <th>@Html.DisplayNameFor(modelItem => Model.Employee.Id)</th>
+            <th>@Html.DisplayNameFor(modelItem => Model.Employee.Group)</th>
+            <th>@Html.DisplayNameFor(modelItem => Model.Employee.Name)</th>
+            <th>@Html.DisplayNameFor(modelItem => Model.Employee.Gender)</th>
+            <th>@Html.DisplayNameFor(modelItem => Model.Employee.PhoneNumber)</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var employee in Model.Employees)
+        {
+            <tr>
+                <td>@employee.Id</td>
+                <td>@employee.Group</td>
+                <td>@employee.Name</td>
+                @if (@employee.Gender)
+                {
+                    <td>Male</td>
+                }
+                else
+                {
+                    <td>Female</td>
+                }
+
+                <td>@employee.PhoneNumber</td>
+                <td class="text-center">
+                    <a class="btn btn-dark text-light" asp-action="Edit" asp-route-Id="@employee.Id">Edit</a>
+                    <a class="btn btn-dark text-light" asp-action="Delete" asp-route-Id="@employee.Id" onclick="return confirm('Kill or not ?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</form>
+
+<div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+    <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div>
+    <script>
+        (function () {
+            var setting = { "height": 500, "width": 500, "zoom": 18, "queryString": "28 Nguyễn Tri Phương, Phú Nhuận, Thành phố Huế, Thua Thien Hue, Vietnam", "place_id": "ChIJR2NoADyhQTERmM965suMLjE", "satellite": false, "centerCoord": [16.46444435469324, 107.5919993], "cid": "0x312e8ccbe67acf98", "cityUrl": "/vietnam/thon-truong-giang-403656", "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3", "embed_id": "103706" };
+            var d = document;
+            var s = d.createElement('script');
+            s.src = 'https://1map.com/js/script-for-user.js?embed_id=103706';
+            s.async = true;
+            s.onload = function (e) {
+                window.OneMap.initMap(setting)
+            };
+            var to = d.getElementsByTagName('script')[0];
+            to.parentNode.insertBefore(s, to);
+        })();
+        </script>
+    <a href="https://1map.com/map-embed?embed_id=103706">1map.com</a>
+</div>
