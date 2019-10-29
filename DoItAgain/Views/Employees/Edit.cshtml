@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label asp-for="Employee.Group">Group</label>
-            @Html.DropDownList("Group", new SelectList(Enum.GetValues(typeof(Group))), new { @class = "form-control" })
+            <select class="form-control" asp-for="Employee.Group" asp-items="Html.GetEnumSelectList<Group>()"></select>
         </div>
 
         <div class="form-group">
